@@ -1,0 +1,529 @@
+<!--
+  ============================================================
+  HOW TO EDIT THIS SITE — CHEAT SHEET FOR FUTURE YOU
+  ============================================================
+  Open this file in any text editor (VS Code, Notepad, TextEdit).
+  Everything you'll want to change lives inside <body>, further down.
+  Look for the "EDIT HERE" comments — each marks a spot you can
+  safely copy/paste or change text inside without breaking anything.
+
+  QUICK INDEX (search for these labels with Ctrl/Cmd+F):
+    [EDIT: COLORS]        -> change the site's color palette (one place)
+    [EDIT: HERO]           -> your name, tagline, email, phone, links
+    [EDIT: RESEARCH]       -> add/remove/change a research project card
+    [EDIT: EXPERIENCE]     -> add/remove a job or education entry
+    [EDIT: PUBLICATIONS]   -> add/remove a publication
+    [EDIT: AWARDS]         -> honors, memberships, conference talks
+    [EDIT: CONTACT]        -> footer contact card at the bottom
+
+  GENERAL RULE: to ADD a new item (a new pub, a new job, a new award),
+  copy one existing block of that type (from its opening <div> or <li>
+  to its matching closing tag), paste it right below, then just edit
+  the text inside. To REMOVE one, delete the whole block the same way.
+
+  You do NOT need to touch the <style> section or the <script> at the
+  bottom for normal updates — those just make things look and behave
+  right, and they don't depend on how much content is above them.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madhav Kharel — Environmental Researcher</title>
+<meta name="description" content="Madhav Kharel, Doctoral Researcher at University at Albany, SUNY — environmental fate and transport of PFAS and emerging contaminants.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* [EDIT: COLORS] Change any hex code below and it updates everywhere
+     on the site automatically — nothing else needs to change. */
+  :root{
+    --bg: #eef2ec;
+    --paper: #f6f6ef;
+    --ink: #16241f;
+    --ink-soft: #3d4d46;
+    --canopy: #3f7264;
+    --soil: #7c5a3a;
+    --groundwater: #3e5c66;
+    --bedrock: #24211c;
+    --accent: #a8491e;
+    --hair: rgba(22,36,31,0.14);
+    --rail-w: 84px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{ font-family: 'Fraunces', serif; font-weight: 600; color: var(--ink); margin: 0; }
+  a{ color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(168,73,30,0.35); }
+  a:hover{ border-bottom-color: var(--accent); }
+  .mono{ font-family:'IBM Plex Mono', monospace; letter-spacing: 0.02em; }
+
+  /* ---------- Strata rail (signature nav element) ---------- */
+  .strata-rail{
+    position: fixed;
+    top:0; left:0;
+    width: var(--rail-w);
+    height: 100vh;
+    display:flex;
+    flex-direction: column;
+    z-index: 40;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.06);
+  }
+  .band{
+    flex:1;
+    position: relative;
+    border:0;
+    cursor:pointer;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding-bottom: 14px;
+    opacity: 0.55;
+    transition: opacity .5s ease, flex-grow .5s ease;
+  }
+  .band span{
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: #f2f0e8;
+    text-transform: uppercase;
+  }
+  .band-canopy{ background: var(--canopy); }
+  .band-soil{ background: var(--soil); }
+  .band-groundwater{ background: var(--groundwater); }
+  .band-bedrock{ background: var(--bedrock); flex: 1.3; }
+  .band.active{ opacity: 1; flex-grow: 1.6; }
+  .band.active::before{
+    content:"";
+    position:absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 5px; height: 34px;
+    background: var(--paper);
+    border-radius: 0 3px 3px 0;
+  }
+
+  main{ margin-left: var(--rail-w); }
+
+  .wrap{ max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding: 96px 0 56px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .hero h1{ font-size: clamp(2.4rem, 5vw, 3.4rem); line-height: 1.05; }
+  .hero .role{ font-size: 1.05rem; color: var(--ink-soft); margin-top: 14px; max-width: 56ch; }
+  .hero-meta{ margin-top: 26px; display:flex; flex-wrap:wrap; gap: 18px; font-size: 0.92rem; }
+  .hero-meta a{ border-bottom-color: transparent; }
+  .hero-meta a:hover{ border-bottom-color: var(--accent); }
+
+  /* chromatogram trace */
+  .trace{ margin-top: 40px; width: 100%; height: 64px; }
+  .trace path{
+    fill:none; stroke: var(--accent); stroke-width:2;
+    stroke-dasharray: 900; stroke-dashoffset: 900;
+    animation: draw 2.2s ease forwards .3s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset: 0; } }
+
+  /* ---------- Sections ---------- */
+  section{ padding: 56px 0; border-top: 1px solid var(--hair); }
+  section:first-of-type{ border-top: none; }
+  .section-head{ display:flex; align-items:baseline; gap: 14px; margin-bottom: 28px; }
+  .section-num{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--accent); }
+  section h2{ font-size: 1.5rem; }
+
+  p{ margin: 0 0 14px; color: var(--ink-soft); }
+  .lead{ color: var(--ink); font-size: 1.02rem; }
+
+  /* Research cards */
+  .project{
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    border-left: 3px solid var(--soil);
+    border-radius: 4px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .project.done{ border-left-color: var(--groundwater); }
+  .project-top{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .project-top h3{ font-size: 1.05rem; }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space:nowrap;
+  }
+  .tag.ongoing{ background: rgba(63,114,100,0.14); color: var(--canopy); }
+  .tag.done{ background: rgba(62,92,102,0.14); color: var(--groundwater); }
+  .project p{ margin-top: 8px; margin-bottom:0; }
+
+  .contrib{ margin-top: 30px; }
+  .contrib ul{ margin:0; padding-left: 20px; color: var(--ink-soft); }
+  .contrib li{ margin-bottom: 8px; }
+
+  /* Experience / education */
+  .timeline-item{ display:grid; grid-template-columns: 130px 1fr; gap: 18px; margin-bottom: 24px; }
+  .timeline-item .when{ font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-soft); padding-top:2px; }
+  .timeline-item h3{ font-size: 1rem; }
+  .timeline-item .org{ color: var(--ink-soft); font-size: 0.92rem; margin-top: 2px; }
+  @media (max-width: 560px){
+    .timeline-item{ grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* Publications */
+  .pub{ padding: 14px 0; border-bottom: 1px solid var(--hair); display:flex; gap:14px; }
+  .pub:last-child{ border-bottom:none; }
+  .pub-num{ font-family:'IBM Plex Mono', monospace; color: var(--accent); font-size: 0.85rem; padding-top:3px; }
+  .pub-text{ font-size: 0.95rem; color: var(--ink-soft); }
+  .pub-text b{ color: var(--ink); font-weight: 600; }
+  .note{ font-size: 0.88rem; color: var(--ink-soft); margin-top: 16px; font-style: italic; }
+
+  /* Awards / conferences / memberships */
+  .grid-two{ display:grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (max-width: 700px){ .grid-two{ grid-template-columns: 1fr; gap: 0; } }
+  .list-plain{ list-style:none; padding:0; margin:0; }
+  .list-plain li{ padding: 10px 0; border-bottom: 1px solid var(--hair); font-size: 0.94rem; color: var(--ink-soft); }
+  .list-plain li:last-child{ border-bottom:none; }
+  .list-plain b{ color: var(--ink); }
+
+  /* Contact */
+  .contact-card{
+    background: var(--bedrock);
+    color: #f2f0e8;
+    border-radius: 6px;
+    padding: 36px;
+  }
+  .contact-card h2{ color: #f2f0e8; }
+  .contact-card p{ color: #cfd3c9; }
+  .contact-links{ display:flex; flex-wrap:wrap; gap: 22px; margin-top: 20px; }
+  .contact-links a{ color: #f2f0e8; border-bottom-color: rgba(242,240,232,0.4); font-family:'IBM Plex Mono', monospace; font-size: 0.9rem; }
+  .contact-links a:hover{ border-bottom-color: var(--accent); }
+
+  footer{ padding: 34px 0 70px; font-size: 0.8rem; color: var(--ink-soft); }
+
+  /* Mobile: rail becomes a top strip */
+  @media (max-width: 680px){
+    .strata-rail{
+      flex-direction: row;
+      width: 100%;
+      height: 44px;
+      top:0; left:0;
+    }
+    .band span{ writing-mode: horizontal-tb; transform:none; }
+    .band{ align-items:center; padding-bottom:0; }
+    .band.active::before{
+      left:50%; top:0; transform: translateX(-50%);
+      width: 30px; height: 4px; border-radius: 0 0 3px 3px;
+    }
+    main{ margin-left:0; margin-top: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="strata-rail" aria-label="Section navigation">
+  <button class="band band-canopy active" data-target="about" aria-label="About"><span>Canopy</span></button>
+  <button class="band band-soil" data-target="research" aria-label="Research"><span>Soil</span></button>
+  <button class="band band-groundwater" data-target="experience" aria-label="Experience"><span>Groundwater</span></button>
+  <button class="band band-bedrock" data-target="publications" aria-label="Publications"><span>Bedrock</span></button>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <!-- [EDIT: HERO] Your name, tagline, and contact links. Update the
+         Google Scholar href below once you have your real profile URL. -->
+    <section id="about" data-depth="canopy">
+      <div class="hero">
+        <div class="eyebrow">Doctoral Researcher · University at Albany, SUNY</div>
+        <h1>Madhav Kharel</h1>
+        <p class="role">Investigating the environmental fate and transport of PFAS and other emerging contaminants — analytical characterization, phytoremediation-based mitigation, and risk assessment across soil–water–plant systems.</p>
+        <div class="hero-meta mono">
+          <a href="mailto:mkharel@albany.edu">mkharel@albany.edu</a>
+          <span>+1 (518) 331-9865</span>
+          <a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a>
+        </div>
+        <svg class="trace" viewBox="0 0 600 64" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,50 L60,50 L75,50 C85,50 88,14 95,14 C102,14 105,50 115,50 L220,50 C230,50 233,42 240,42 C247,42 250,50 260,50 L360,50 C368,50 371,6 378,6 C385,6 388,50 398,50 L520,50 C526,50 529,34 535,34 C541,34 544,50 550,50 L600,50"/>
+        </svg>
+      </div>
+    </section>
+
+    <section id="research" data-depth="soil">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>Research</h2>
+      </div>
+      <p class="lead">At the Zhang Lab (Research Foundation for SUNY), I contribute to multiple federally and state-funded projects on the environmental fate, transport, and sustainable remediation of organic contaminants.</p>
+
+      <!-- [EDIT: RESEARCH]
+           Each project is one <div class="project">...</div> block.
+           To ADD a project: copy a whole block below (open/close div),
+             paste it, then edit the title, dates, tag text, and description.
+           To mark a project COMPLETED: add class="project done" instead
+             of class="project" (this switches the side-stripe color),
+             and change <span class="tag ongoing"> to <span class="tag done">.
+           To REMOVE a project: delete its entire block. -->
+      <div class="project">
+        <div class="project-top">
+          <h3>NSF Project II — PFAS Bioaccumulation in Edible Crops</h3>
+          <span class="tag ongoing">2025–2028 · Ongoing</span>
+        </div>
+        <p>Investigating PFAS bioaccumulation behavior, uptake mechanisms, and food quality implications in edible crops.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-top">
+          <h3>U.S. EPA Project — PFAS in Land-Applied Biosolids</h3>
+          <span class="tag ongoing">2024–2027 · Ongoing</span>
+        </div>
+        <p>Building a mechanistic understanding of PFAS fate and mitigation in agricultural settings where biosolids are land-applied.</p>
+      </div>
+
+      <div class="project done">
+        <div class="project-top">
+          <h3>NSF Project I — ERASE-PFAS</h3>
+          <span class="tag done">2022–2025 · Completed</span>
+        </div>
+        <p>Stabilization of per- and polyfluorinated substances in sewage sludge intended for land application.</p>
+      </div>
+
+      <div class="project done">
+        <div class="project-top">
+          <h3>NYS DEC Project — PFAS Risk in the Great Lakes Basin</h3>
+          <span class="tag done">2024–2025 · Completed</span>
+        </div>
+        <p>Assessing and mitigating PFAS contamination risks in surface water resulting from biosolids land application.</p>
+      </div>
+
+      <div class="contrib">
+        <h3 style="font-size:1rem; margin-bottom:10px;">Key contributions</h3>
+        <ul>
+          <li>Investigating PFAS–plant interaction mechanisms to understand bioaccumulation and translocation in edible crops.</li>
+          <li>Developing sustainable remediation and detection techniques, including phytoremediation, sorption, stabilization, and electrochemical sensing.</li>
+          <li>Conducting environmental risk assessment and contaminant analysis in aqueous and solid waste matrices.</li>
+          <li>Assisting in data analysis, report writing, and scientific manuscript preparation.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="experience" data-depth="groundwater">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Experience &amp; Education</h2>
+      </div>
+
+      <!-- [EDIT: EXPERIENCE]
+           Each job/degree is one <div class="timeline-item">...</div> block,
+           listed newest to oldest. To ADD one: copy a block, paste it in
+           the right chronological spot, edit the date/title/org text.
+           To REMOVE one: delete its whole block. -->
+      <div class="timeline-item">
+        <div class="when mono">2024 – Present</div>
+        <div>
+          <h3>Graduate Research Assistant</h3>
+          <div class="org">Zhang Lab, Research Foundation for SUNY, University at Albany</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="when mono">2024 – Present</div>
+        <div>
+          <h3>Ph.D., Environmental &amp; Sustainable Engineering</h3>
+          <div class="org">University at Albany, SUNY · CGPA 3.97</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="when mono">2021 – 2023</div>
+        <div>
+          <h3>Engineering Chemistry Faculty (Undergraduate)</h3>
+          <div class="org">Institute of Engineering, Thapathali Campus, Tribhuvan University</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="when mono">2022 – 2023</div>
+        <div>
+          <h3>Chemistry Faculty (Secondary Level)</h3>
+          <div class="org">Liverpool International College, Kathmandu</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="when mono">2020 – 2023</div>
+        <div>
+          <h3>M.S. Research Assistant</h3>
+          <div class="org">Dr. Neupane's Research Group, Tribhuvan University — lignocellulosic fiber characterization &amp; VOC air-quality monitoring</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="when mono">2017 – 2021</div>
+        <div>
+          <h3>M.S., Physical Chemistry</h3>
+          <div class="org">Tribhuvan University, Kathmandu · CGPA 3.66</div>
+        </div>
+      </div>
+
+      <div class="contrib">
+        <h3 style="font-size:1rem; margin-bottom:10px;">Technical skills</h3>
+        <ul>
+          <li><b style="color:var(--ink)">Programming &amp; data analysis:</b> R and Python for analysis, visualization, and reproducible workflows.</li>
+          <li><b style="color:var(--ink)">Analytical techniques:</b> LC-MS/MS, TOC, and Combustion Ion Chromatography (CIC).</li>
+          <li><b style="color:var(--ink)">Modeling &amp; simulation:</b> SWAT for hydrological modeling; PHREEQC for geochemical modeling.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="publications" data-depth="bedrock">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Publications</h2>
+      </div>
+      <p class="lead">Six published, two currently under review.</p>
+
+      <!-- [EDIT: PUBLICATIONS]
+           Each paper is one <div class="pub">...</div> block, numbered
+           in <div class="pub-num">. To ADD a paper: copy a block, paste
+           it, update the number and citation text/DOI link.
+           Note: publication #2's DOI below is incomplete in the source
+           CV (https://doi.org/10.3126/) — fill in the rest once you have it. -->
+      <div class="pub">
+        <div class="pub-num mono">01</div>
+        <div class="pub-text">Ilango, A. K., <b>Kharel, M.</b>, Zhang, W., &amp; Liang, Y. PFAS Uptake by Plants in Soils Amended with Biosolids Derived from Wastewater with Industrial Input. <i>ACS Environmental Au</i>, 2026. <a href="https://pubs.acs.org/doi/full/10.1021/acsenvironau.6c00004" target="_blank" rel="noopener">DOI ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="pub-num mono">02</div>
+        <div class="pub-text">Chalise, S.; <b>Kharel, M.</b>; Chalise, B.; Sharma, K. R.; Gyawali, D.; Paudyal, H.; Neupane, B. B. Chemical Characterization of Whiteboard Marker Inks Available in Nepal and Health Awareness Among High School Teachers. <i>Journal of Nepal Chemical Society</i>, 2026. <a href="https://doi.org/10.3126/" target="_blank" rel="noopener">DOI ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="pub-num mono">03</div>
+        <div class="pub-text"><b>Kharel, M.</b>; Zuo, Y.; Zhang, W. Evaluation and Comparison of Three Common Methods for PFAS Extraction from Soybean Tissues. <i>ACS Agric. Sci. Technol.</i>, 2025. <a href="https://pubs.acs.org/doi/10.1021/acsagscitech.5c00518" target="_blank" rel="noopener">DOI ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="pub-num mono">04</div>
+        <div class="pub-text"><b>Kharel, M.</b>; Tian, M.; Vu, T.; Miao, Y.; Zhang, W. PFAS in Plant–Biosolids–Soil Systems: Distribution, Fractionation, and Effects on Soil Microbial Communities. <i>J. Hazard. Mater.</i> 2025, 497, 139754. <a href="https://doi.org/10.1016/j.jhazmat.2025.139754" target="_blank" rel="noopener">DOI ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="pub-num mono">05</div>
+        <div class="pub-text">Kandel, K. P.; Adhikari, M.; <b>Kharel, M.</b>; Aryal, G. M.; Pandeya, S.; Joshi, M. K.; Dahal, B.; Gautam, B.; Neupane, B. B. Comparative Study on Material Properties of Wood-Ash Alkali and Commercial Alkali Treated Sterculia Fiber. <i>Cellulose</i> 2022, 29 (10), 5913–5922. <a href="https://doi.org/10.1007/s10570-022-04610-w" target="_blank" rel="noopener">DOI ↗</a></div>
+      </div>
+      <div class="pub">
+        <div class="pub-num mono">06</div>
+        <div class="pub-text"><b>Kharel, M.</b>; Chalise, S.; Chalise, B.; Sharma, K. R.; Gyawali, D.; Paudyal, H.; Neupane, B. B. Assessing Volatile Organic Compound Level in Selected Workplaces of Kathmandu Valley. <i>Heliyon</i> 2021, 7 (11), e08262. <a href="https://doi.org/10.1016/j.heliyon.2021.e08262" target="_blank" rel="noopener">DOI ↗</a></div>
+      </div>
+
+      <p class="note">Additional manuscripts under review in ACS EST Engineering, and Environmental Pollution.</p>
+    </section>
+
+    <section id="awards" data-depth="bedrock">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Honors, Talks &amp; Memberships</h2>
+      </div>
+
+      <!-- [EDIT: AWARDS] Each honor/membership/talk is one <li>...</li>
+           line. To ADD one: copy a line, paste it, edit the text.
+           To REMOVE one: delete its <li> line. -->
+      <div class="grid-two">
+        <div>
+          <h3 style="font-size:0.95rem; margin-bottom:12px;">Honors &amp; Awards</h3>
+          <ul class="list-plain">
+            <li><b>John J. Sullivan Award</b> — Spring 2025, College of Nanotechnology, Science, and Engineering, UAlbany</li>
+            <li><b>Benevolent Association Research and Creative Activity Grant</b> — Fall 2024</li>
+            <li><b>Benevolent Association Research and Creative Activity Grant</b> — Spring 2026</li>
+          </ul>
+
+          <h3 style="font-size:0.95rem; margin: 26px 0 12px;">Professional Memberships</h3>
+          <ul class="list-plain">
+            <li>Lifetime Member, Nepal Chemical Society (NCS)</li>
+            <li>Student Member, American Chemical Society (ACS)</li>
+            <li>Member, Association of Environmental Engineering and Science Professors (AEESP)</li>
+            <li>Member, National Society of Professional Engineers (NSPE)</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="font-size:0.95rem; margin-bottom:12px;">Conference Involvements</h3>
+          <ul class="list-plain">
+            <li><b>Oral Speaker</b> — The Science of PFAS: Public Health &amp; the Environment Conference, Apr 2026, Worcester, MA</li>
+            <li><b>Poster Presenter</b> — AEESP 2025 Research and Education Conference, Duke University, NC</li>
+            <li><b>Attendee</b> — Second Annual Meeting, NYS Center of Excellence in Healthy Water Solutions, SUNY ESF, Syracuse, NY</li>
+            <li><b>Oral Speaker</b> — International Chemical Congress 2023, Kathmandu, Nepal</li>
+            <li><b>Attendee</b> — Workshop on Tools, Techniques &amp; Advanced Data Analysis in Chemistry, Tribhuvan University</li>
+            <li><b>Attendee</b> — Workshop on Research and Publication Ethics, Patan, Nepal</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- [EDIT: CONTACT] Email, phone, and Scholar link — same as the
+         hero at the top. The supervisor names in the footer below are
+         plain text, easy to update or remove. -->
+    <section id="contact" data-depth="bedrock">
+      <div class="contact-card">
+        <h2>Get in touch</h2>
+        <p>Open to collaboration on PFAS environmental fate, remediation, and risk assessment research.</p>
+        <div class="contact-links">
+          <a href="mailto:mkharel@albany.edu">mkharel@albany.edu</a>
+          <span class="mono" style="color:#cfd3c9;">+1 (518) 331-9865</span>
+          <a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar ↗</a>
+        </div>
+      </div>
+      <footer>
+        Ph.D. Supervisor: Dr. Weilan Zhang · Mentor: Dr. Aswin Kumar Ilango · M.S. Supervisor: Dr. Bhanu Bhakta Neupane — full contact details available on request.
+      </footer>
+    </section>
+
+  </div>
+</main>
+
+<script>
+  const bands = document.querySelectorAll('.band');
+  const sections = document.querySelectorAll('section[data-depth]');
+
+  bands.forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const target = document.getElementById(b.dataset.target);
+      if(target) target.scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  const depthToBand = {
+    canopy: document.querySelector('.band-canopy'),
+    soil: document.querySelector('.band-soil'),
+    groundwater: document.querySelector('.band-groundwater'),
+    bedrock: document.querySelector('.band-bedrock')
+  };
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const depth = entry.target.dataset.depth;
+        bands.forEach(b=>b.classList.remove('active'));
+        if(depthToBand[depth]) depthToBand[depth].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s=>observer.observe(s));
+</script>
+
+</body>
+</html>  
