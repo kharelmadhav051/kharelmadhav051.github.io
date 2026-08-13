@@ -1,0 +1,256 @@
+/* ==========================================================
+   Madhav Kharel academic website
+   EDIT COLORS HERE if you want to change the appearance later.
+   ========================================================== */
+:root {
+  --purple: #46166b;
+  --purple-dark: #32104d;
+  --text: #292929;
+  --muted: #666;
+  --line: #e2e2e2;
+  --bg: #ffffff;
+  --soft: #f7f5f9;
+  --max: 1120px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+a {
+  color: var(--purple);
+  text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+.wrap {
+  width: min(var(--max), calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.topbar {
+  border-bottom: 1px solid var(--line);
+  background: rgba(255,255,255,.97);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-wrap {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.site-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--purple-dark);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+nav a {
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+nav a:hover { color: var(--purple); }
+
+.page-grid {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 64px;
+  padding-top: 52px;
+  padding-bottom: 72px;
+}
+
+.profile {
+  align-self: start;
+  position: sticky;
+  top: 100px;
+}
+
+.profile-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 61% 47%;
+  display: block;
+  border-radius: 2px;
+  box-shadow: 0 3px 16px rgba(0,0,0,.12);
+}
+
+.profile h1 {
+  color: var(--purple-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  line-height: 1.15;
+  margin: 24px 0 8px;
+}
+
+.position {
+  margin: 0 0 18px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.affiliation p {
+  margin: 2px 0;
+  color: #444;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.lab-link {
+  font-size: 14px;
+  margin: 16px 0;
+}
+
+.profile-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 18px 0 24px;
+  font-size: 14px;
+}
+
+.cnse-logo {
+  width: 100%;
+  max-width: 270px;
+  height: auto;
+  margin-top: 10px;
+}
+
+.content {
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.content section {
+  scroll-margin-top: 90px;
+  padding-bottom: 36px;
+  margin-bottom: 36px;
+  border-bottom: 1px solid var(--line);
+}
+
+.content section:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+h2 {
+  color: var(--purple-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0 0 20px;
+}
+
+h3 {
+  color: #333;
+  font-size: 19px;
+  margin: 28px 0 14px;
+}
+
+.intro p {
+  font-size: 17px;
+  max-width: 780px;
+}
+
+.research-list {
+  padding-left: 23px;
+}
+
+.research-list li { margin: 7px 0; }
+
+.project {
+  background: var(--soft);
+  border-left: 3px solid var(--purple);
+  padding: 15px 18px;
+  margin: 12px 0;
+}
+
+.project p {
+  margin: 4px 0 0;
+}
+
+.section-note {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.pub-list {
+  padding-left: 24px;
+}
+
+.pub-list li {
+  margin-bottom: 17px;
+  padding-left: 5px;
+}
+
+.simple-list {
+  padding-left: 20px;
+}
+
+.simple-list li { margin: 8px 0; }
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 22px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+footer p { margin: 0; }
+
+@media (max-width: 820px) {
+  .topbar { position: static; }
+  .nav-wrap {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px 0;
+    gap: 10px;
+  }
+  nav { gap: 13px 18px; }
+  .page-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    padding-top: 30px;
+  }
+  .profile {
+    position: static;
+    max-width: 520px;
+  }
+  .profile-photo {
+    max-width: 360px;
+  }
+  .cnse-logo {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap { width: min(100% - 26px, var(--max)); }
+  h2 { font-size: 26px; }
+  .profile h1 { font-size: 28px; }
+}
