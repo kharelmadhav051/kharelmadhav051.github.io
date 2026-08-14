@@ -254,108 +254,69 @@ footer p { margin: 0; }
   h2 { font-size: 26px; }
   .profile h1 { font-size: 28px; }
 }
-/* Research & Academic Highlights */
+/* ==========================================================
+   RESEARCH & ACADEMIC HIGHLIGHTS
+   ========================================================== */
 
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 260px);
-  gap: 28px;
+#highlights .highlights-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
   margin-top: 20px;
-  justify-content: start;
+  align-items: flex-start;
 }
 
-.highlight-card {
+#highlights .highlight-card {
+  width: 250px;
   margin: 0;
-  width: 260px;
 }
 
-.highlight-card img {
-  width: 260px;
-  height: 175px;
+#highlights .highlight-card img {
+  width: 250px;
+  height: 165px;
   object-fit: cover;
   object-position: center;
   display: block;
   border-radius: 3px;
 }
 
-.highlight-card figcaption {
-  padding-top: 9px;
+#highlights .highlight-card figcaption {
+  width: 250px;
+  padding-top: 8px;
   line-height: 1.4;
 }
 
-.highlight-card figcaption strong {
+#highlights .highlight-card figcaption strong {
   display: block;
   color: var(--purple-dark);
   font-size: 15px;
   margin-bottom: 4px;
 }
 
-.highlight-card figcaption span {
+#highlights .highlight-card figcaption span {
   display: block;
   color: #555;
   font-size: 13px;
 }
 
-@media (max-width: 700px) {
-  .highlights-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .highlight-card {
-    width: 100%;
-    max-width: 320px;
-  }
-
-  .highlight-card img {
-    width: 100%;
-    height: auto;
-  }
-}
-/* FORCE SMALL HIGHLIGHT IMAGES */
-#highlights .highlights-grid {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 30px !important;
-  align-items: flex-start !important;
-}
-
-#highlights .highlight-card {
-  width: 280px !important;
-  max-width: 280px !important;
-  margin: 0 !important;
-}
-
-#highlights .highlight-card img {
-  display: block !important;
-  width: 280px !important;
-  max-width: 280px !important;
-  height: 190px !important;
-  object-fit: cover !important;
-  object-position: center !important;
-}
-
-#highlights .highlight-card figcaption {
-  width: 280px !important;
-  margin-top: 8px !important;
-  font-size: 13px !important;
-  line-height: 1.4 !important;
-}
-
-#highlights .highlight-card figcaption strong {
-  display: block;
-  font-size: 15px;
-  margin-bottom: 4px;
-}
-
 @media (max-width: 650px) {
-  #highlights .highlight-card,
-  #highlights .highlight-card img,
-  #highlights .highlight-card figcaption {
-    width: 100% !important;
-    max-width: 320px !important;
+
+  #highlights .highlights-grid {
+    display: block;
+  }
+
+  #highlights .highlight-card {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 25px;
   }
 
   #highlights .highlight-card img {
-    height: auto !important;
+    width: 100%;
+    height: auto;
+  }
+
+  #highlights .highlight-card figcaption {
+    width: 100%;
   }
 }
